@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" crossorigin="anonymous">
+    <script src="/static/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <style>
+        .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <title>安装IPA</title>
+</head>
+<body>
+    <div >
+        <h3 class="wrap" style="color:#d6ab74;size:24px;">Your Company
+            <span class="label label-danger" style="vertical-align: center;font-size: 14px;margin-left: 5px;">iOS内测版</span></h3>
+    </div>
+
+    <br>
+
+    <div style="text-align: center;">
+
+        {% if latest_ipa %}
+        <span style="color: #969b9d;">
+             版本：{{ latest_ipa.version }} &nbsp;&nbsp; 大小：{{ latest_ipa.file_size }}
+             <br>
+             更新说明：{{ latest_ipa.update_desc }} &nbsp;&nbsp; 更新时间：{{ latest_ipa.create_time }}
+        </span>
+
+        <br><br>
+        <button type="button" class="btn btn-success" style="background-color: #35c9ad;border-radius: 30px;font-size: 14px;padding: 8px 20px;">
+            <a style="text-decoration: none; color: white;" title="点击安装" href="itms-services://?action=download-manifest&url={{ latest_ipa.plist_url }}" >
+            点击安装最新版本
+            </a>
+        </button>
+        {% end %}
+
+        <br><br><br><br>
+        <br><br><br><br>
+
+
+        <div>
+        <div class="wrap" style="color:#333;font-size:20px;">历史版本</div>
+        </div>
+
+        {% for index, ipa in enumerate(history_ipa_list) %}
+        <span style="color: #969b9d;">
+            👉 版本：{{ ipa.version }}
+            <a style="text-decoration: none;font-weight: bold"
+               href="itms-services://?action=download-manifest&url={{ ipa.plist_url }}" >
+                点击安装
+            </a>
+            <br>
+            更新说明：{{ ipa.update_desc }} &nbsp;&nbsp; 更新时间：{{ ipa.create_time }}
+        </span>
+        <br>
+        {% end %}
+    </div>
+
+
+</body>
+</html>

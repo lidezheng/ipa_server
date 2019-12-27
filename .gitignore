@@ -1,0 +1,11 @@
+*.swp
+*.pyc
+*.log
+log/*
+.settings/
+.DS_Store/*
+.DS_Store
+.idea/*
+example/
+file/
+*.db
